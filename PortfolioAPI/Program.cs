@@ -32,6 +32,8 @@ builder.Services.AddAuthentication(options =>
     opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
     {
         ValidateIssuer = true,
+        ValidIssuer = builder.Configuration.GetValue<string>("Auth:Issuer"),
+        ValidAudience = builder.Configuration.GetValue<string>("Auth:Audi"),
         ValidateAudience = true,
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetValue<string>("Auth:Key"))),

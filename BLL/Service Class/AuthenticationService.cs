@@ -33,7 +33,7 @@ namespace BLL.Service_Class
                     Claims = new Dictionary<string, object>
                     {
                         { "Name", user.UserName },
-                        { ClaimTypes.Role, "Admin" }
+                        { ClaimTypes.Role, "Admin" },
                     },
                     Expires = DateTime.UtcNow.AddMinutes(10)
                 };
