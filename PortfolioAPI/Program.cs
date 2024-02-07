@@ -43,7 +43,7 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddCors(o =>
 {
-    o.AddPolicy(name: "http://localhost:4200", p => p.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
+    o.AddPolicy(name: "http://localhost:4200", p => p.WithOrigins("*").AllowAnyMethod().AllowAnyHeader());
 });
 
 builder.Services.AddScoped<IProjectService, ProjectService>();
@@ -60,7 +60,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors("http://localhost:4200");
+app.UseSwagger();
+app.UseSwaggerUI();
+app.UseCors("*");
 
 app.UseHttpsRedirection();
 
