@@ -9,5 +9,6 @@ namespace DAL.RepositoryInterface
     public interface IProjectRepository
     {
         Task<IEnumerable<Project>> GetAll();
+        Task<Project> AddProject(Project project);
     }
 }

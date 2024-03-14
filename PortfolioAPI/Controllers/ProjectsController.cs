@@ -1,4 +1,5 @@
 ﻿using BLL.Service_Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Models;
 
@@ -22,11 +23,26 @@ namespace PortfolioAPI.Controllers
         [Route("GetAllProjects")]
         public async Task<ActionResult<IEnumerable<ProjectModel>>> GetAllProjects()
         {
-            string a = "";
             _logger.Log(LogLevel.Information, "Get All projects called");
             IEnumerable<ProjectModel> projects = await _projectService.GetAllProjects();
 
             return Ok(projects);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("AddProject")]
+        public async Task<ActionResult<ProjectModel>> AddProject([FromBody] ProjectModel model)
+        {
+            _logger.Log(LogLevel.Information, "Add project called");
+            ProjectModel project = await _projectService.AddProject(model);
+
+            if(project == null)
+            {
+                return BadRequest(project);
+            }
+
+            return Ok(project);
         }
     }
 }

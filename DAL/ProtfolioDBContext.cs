@@ -24,15 +24,18 @@ namespace DAL
                     {
                         Id = 1,
                         Description = "Project 1 Description",
-                        Name = "Dotnet web API"
+                        Name = "Dotnet web API",
+                        GitLink = "gitLink"
                     },
                     new Project
                     {
                         Id = 2,
                         Description = "Project 2 Description",
-                        Name = "Angular web API"
+                        Name = "Angular web API",
+                        GitLink = "gitlink"
                     }
                 );
+                x.Property(p => p.Name).IsRequired();
             });
             modelBuilder.Entity<User>(x =>
             {

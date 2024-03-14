@@ -13,6 +13,30 @@ namespace BLL.Service_Class
         {
             _projectRepository = projectRepository;   
         }
+
+        public async Task<ProjectModel> AddProject(ProjectModel projectModel)
+        {
+            ProjectModel addedProjectModel;
+            try
+            {
+                Project project = new Project { Description = projectModel.Description, Name = projectModel.Name, GitLink = projectModel.GitLink };
+                Project addedProject = await _projectRepository.AddProject(project);
+                if(addedProject != null)
+                {
+                    addedProjectModel = new ProjectModel { Description = addedProject.Description, Name = addedProject.Name, GitLink = addedProject.GitLink, ProjectId = addedProject.Id };
+                }
+                else
+                {
+                    addedProjectModel = new ProjectModel();
+                }
+                return addedProjectModel;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<IEnumerable<ProjectModel>> GetAllProjects()
         {
             try
